@@ -1,3 +1,9 @@
+/**
+ @file Player.h
+ @author Gregório da Luz
+ @date February 2021
+ @brief header for Player class for Othello game
+ **/
 #include <iostream>
 #include <assert.h> 
 
