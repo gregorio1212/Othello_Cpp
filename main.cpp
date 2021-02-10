@@ -1,3 +1,9 @@
+/**
+ @file main.cpp
+ @author Gregório da Luz
+ @date February 2021
+ @brief main.cpp for Othello game
+ **/
 #include <iostream>
 #include "Game.h"
 
