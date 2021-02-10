@@ -1,3 +1,9 @@
+/**
+ @file Game.cpp
+ @author Gregório da Luz
+ @date February 2021
+ @brief Game class for Othello game
+ **/
 #include "Game.h"
 
 Game::Game() : m_disk_counter{}, m_board{}, m_whose_turn{}, m_end{ false }, m_correctInput{ false },
