@@ -1,5 +1,10 @@
+/**
+ @file Game.h
+ @author Gregório da Luz
+ @date February 2021
+ @brief Game header for Game.cpp for Othello game
+ **/
 #include <iostream>
-#include <vector>
 #include "Player.h"
 
 using namespace std;
