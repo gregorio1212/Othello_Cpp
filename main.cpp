@@ -35,7 +35,7 @@ int main() {
             }
             if (othello.freeSlot(user_input_x, user_input_y)) { allowed = othello.allowedSlot(user_input_x, user_input_y); }
         }
-        allowed = false;
+        allowed = false; // setting it as false again for the next turn
 
         othello.settingNewDisk(user_input_x, user_input_y);
         //keeping record of how many disks each player still has
@@ -52,8 +52,10 @@ int main() {
         //showing results and asking if the player wants to play again
         if (othello.getEnd()) {
             othello.theWinnerIs();
-            black.resetDisks();
-            white.resetDisks();
+            if (othello.playAgain()) {
+                black.resetDisks();
+                white.resetDisks();
+            }   
         }
         //checking if the player needs disks from the opponent to play
         else {
