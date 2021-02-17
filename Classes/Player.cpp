@@ -4,7 +4,6 @@
  @date February 2021
  @brief Player class for Othello game
  **/
-
 #include "Player.h"
 
 void Player::oneLessDisk() {

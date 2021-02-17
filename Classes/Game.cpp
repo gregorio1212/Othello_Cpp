@@ -6,9 +6,9 @@
  **/
 #include "Game.h"
 
-Game::Game() : m_disk_counter{}, m_board{}, m_whose_turn{}, m_end{ false }, m_correctInput{ false },
-m_playAgain{}, m_opponent{}, m_machine_check{}, m_move_available{}, m_if_two_end{0},
-m_x_path{}, m_y_path{}, m_if_flip_equals_10{ 0 }, m_temp{0}{
+Game::Game() : m_disk_counter{}, m_board{}, m_whose_turn{}, m_end{ false }, m_playAgain{},
+m_opponent{}, m_machine_check{}, m_move_available{}, m_if_two_end{0}, m_x_path{}, 
+m_y_path{}, m_if_flip_equals_10{ 0 }, m_temp{0}{
 	InitGame();
 }
 
@@ -86,9 +86,9 @@ void Game::flipWhoseTurnAndOpponent() {
 bool Game::noPossibleMove() {
 	while (!allowedTurn()) {
 		m_if_two_end++;
-		//a player loses his turn because he had no possible move, but the other player has, so we keep playing
+		//a player loses his turn because he had no possible move, but the other player has, so we keep playing.
 		if (m_if_two_end == 1) { flipWhoseTurnAndOpponent(); }
-		//end of game, no player can set a disk
+		//end of the game, no player can set a disk.
 		if (m_if_two_end == 2) {
 			m_if_two_end = 0;
 			return true;
@@ -102,7 +102,7 @@ void Game::allowedSlotLoop(int x_, int y_, int i_c, int j_c, int lim_i, int lim_
 	for (int i = i_c; i < lim_i; i++) {
 		for (int j = j_c; j < lim_j; j++) {
 			if (m_board[x_ + i][y_ + j] == m_opponent) {
-				// once an opponent's disk is found in the surroundings, we check if it is "flippable"
+				// once an opponent's disk is found in the surroundings, we check if it can be flipped
 				m_temp = flipAllDirections(x_, y_, i, j);
 				//once one flip has occurred, other slots that have no flip won't change this variable
 				if (m_temp == 10 && m_if_flip_equals_10 == 0) { m_if_flip_equals_10 = m_temp; }
@@ -277,22 +277,22 @@ void Game::settingNewDisk(int x, int y) {
 	m_disk_counter++;
 }
 
-void Game::playAgain() {
-	while (!m_correctInput) {
+bool Game::playAgain() {
+	while (1) {     //infinite loop until we get the right input from the player
 		cout << "Would you like to play it again? (type y - yes or n - no)\n";
 		cin >> m_playAgain;
 		if (m_playAgain == 'y' || m_playAgain == 'Y') {
 			cout << "Nice! Let's play again!\n";
 			m_end = false;
-			m_correctInput = true;
+			InitGame();
+			return true;
 		}
 		else if (m_playAgain == 'n' || m_playAgain == 'N') {
 			cout << "Thank you for playing my game! See you next time!\n";
-			m_correctInput = true;
+			return false;
 		}
 		else { cout << "Wrong! You must type either 'Y'/'y' for yes or 'N'/'n' for now.\n"; }
 	}
-	if (!m_end) { InitGame(); }
 }
 
 void Game::theWinnerIs() {
@@ -310,5 +310,4 @@ void Game::theWinnerIs() {
 	if (black_disks > white_disks) { cout << "Congratulations player with black disks!\n\n"; }
 	else if (white_disks > black_disks) { cout << "Congratulations player with white disks!\n\n"; }
 	else { cout << "It looks like we have a draw\n\n"; }
-	playAgain();
 }
