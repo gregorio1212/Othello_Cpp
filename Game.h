@@ -15,7 +15,6 @@ private:
 	char m_board[8][8];
 	int m_disk_counter;			//limit up to 60
 	char m_whose_turn;			//B -> Black, W -> White
-	bool m_correctInput;		// check input when asking to play again
 	bool m_end;	
 	char m_playAgain;
 	char m_opponent;			
@@ -26,26 +25,30 @@ private:
 	int m_y_path;
 	int m_temp;
 	int m_if_flip_equals_10;
+	void allowedSlotLoop(int x_, int y_, int i_c, int j_c, int lim_i, int lim_j);
+	int flipAllDirections(int x, int y, int i_c, int j_c);
+	bool allowedTurn();
 public:
 	Game();
 	void InitGame();
 	void Info() const;
+	void printBoard()const;
+	
 	bool goodInput(int x_value, int y_value)const;
 	bool freeSlot(int x, int y)const;
-	char getWhoseTurn() const { return m_whose_turn; }
-	int getDiskCounter() const { return m_disk_counter; }
-	void allowedSlotLoop(int x_, int y_, int i_c, int j_c, int lim_i, int lim_j);
 	bool allowedSlot(int x, int y);
-	bool allowedTurn();
-	int flipAllDirections(int x, int y, int i_c, int j_c);
-	void flipWhoseTurnAndOpponent();
+
+	void flipWhoseTurnAndOpponent();	
 	void settingNewDisk(int x, int y);
-	void printBoard()const;
+
 	bool noPossibleMove();
-	bool getEnd() const { return m_end; }
 	void setEnd(bool end) { m_end = end;}
 	void theWinnerIs();
-	void playAgain();
+	bool playAgain();
+
+	char getWhoseTurn() const { return m_whose_turn; }
+	int getDiskCounter() const { return m_disk_counter; }
+	bool getEnd() const { return m_end; }
 };
 
 
