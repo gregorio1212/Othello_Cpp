@@ -1,3 +1,4 @@
+#pragma once
 /**
  @file Player.h
  @author Gregório da Luz
@@ -6,8 +7,6 @@
  **/
 #include <iostream>
 #include <assert.h> 
-
-using namespace std;
 
 class Player
 {
@@ -22,3 +21,5 @@ public:
 	void resetDisks() { m_n_disks_available = 28; }
 	int getColor() const { return m_color; }
 };
+
+// I could set X in the places the player can set their next move

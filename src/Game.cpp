@@ -28,18 +28,18 @@ void Game::InitGame() {
 }
 
 void Game::Info() const{
-	cout << "Player ";
-	if (m_whose_turn == 'B') { cout << "Black, it's your turn!\n"; }
-	else { cout << "White, it's your turn!\n"; }
+	std::cout << "Player ";
+	if (m_whose_turn == 'B') { std::cout << "Black, it's your turn!\n"; }
+	else { std::cout << "White, it's your turn!\n"; }
 }
 
 void Game::printBoard() const{
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
-			if (i == 0 && j == 0) { cout << "    0 1 2 3 4 5 6 7 \n"; }
-			if (j == 0) { cout << i <<" | " << m_board[i][j]; }
-			else if (j == 7) { cout << ' ' << m_board[i][j] << " |" << '\n'; }
-			else { cout << ' ' << m_board[i][j]; }
+			if (i == 0 && j == 0) { std::cout << "    0 1 2 3 4 5 6 7 \n"; }
+			if (j == 0) { std::cout << i <<" | " << m_board[i][j]; }
+			else if (j == 7) { std::cout << ' ' << m_board[i][j] << " |" << '\n'; }
+			else { std::cout << ' ' << m_board[i][j]; }
 		}
 	}
 }
@@ -47,7 +47,7 @@ void Game::printBoard() const{
 bool Game::freeSlot(int x, int y)const{		//WHITE == 1 BLACK == 2
 	if (m_board[x][y] == '-') { return true; }
 	else {
-		cout << "Pick a slot\n";
+		std::cout << "Pick a slot\n";
 		return false;
 	}
 }
@@ -111,6 +111,10 @@ void Game::allowedSlotLoop(int x_, int y_, int i_c, int j_c, int lim_i, int lim_
 	}
 }
 
+// I can simply keep an array of allowed positions from the beginning and block a move that is not part of that allowed
+// x,y postion. Then once a piece is place make the adjustment in the colors in the board and update the allowed positions
+// for each player
+
 bool Game::allowedSlot(int x, int y) {
 	// variable that will control if some flipping on the disks occur	
 	m_temp = 0;
@@ -139,7 +143,7 @@ bool Game::allowedSlot(int x, int y) {
 		return true;
 	}
 	if (!m_machine_check) {
-		cout << "This slot is not allowed, pick another one\n\n";
+		std::cout << "This slot is not allowed, pick another one\n\n";
 	}
 	return false;
 }
@@ -279,19 +283,19 @@ void Game::settingNewDisk(int x, int y) {
 
 bool Game::playAgain() {
 	while (1) {     //infinite loop until we get the right input from the player
-		cout << "Would you like to play it again? (type y - yes or n - no)\n";
-		cin >> m_playAgain;
+		std::cout << "Would you like to play it again? (type y - yes or n - no)\n";
+		std::cin >> m_playAgain;
 		if (m_playAgain == 'y' || m_playAgain == 'Y') {
-			cout << "Nice! Let's play again!\n";
+			std::cout << "Nice! Let's play again!\n";
 			m_end = false;
 			InitGame();
 			return true;
 		}
 		else if (m_playAgain == 'n' || m_playAgain == 'N') {
-			cout << "Thank you for playing my game! See you next time!\n";
+			std::cout << "Thank you for playing my game! See you next time!\n";
 			return false;
 		}
-		else { cout << "Wrong! You must type either 'Y'/'y' for yes or 'N'/'n' for now.\n"; }
+		else { std::cout << "Wrong! You must type either 'Y'/'y' for yes or 'N'/'n' for now.\n"; }
 	}
 }
 
@@ -305,9 +309,9 @@ void Game::theWinnerIs() {
 			else if (m_board[x][y] == 'W') { white_disks++; }
 		}
 	}
-	cout << "Black had " << black_disks << "disks\n\n"
+	std::cout << "Black had " << black_disks << "disks\n\n"
 		 << "White had " << white_disks << "disks\n\n\n";
-	if (black_disks > white_disks) { cout << "Congratulations player with black disks!\n\n"; }
-	else if (white_disks > black_disks) { cout << "Congratulations player with white disks!\n\n"; }
-	else { cout << "It looks like we have a draw\n\n"; }
+	if (black_disks > white_disks) { std::cout << "Congratulations player with black disks!\n\n"; }
+	else if (white_disks > black_disks) { std::cout << "Congratulations player with white disks!\n\n"; }
+	else { std::cout << "It looks like we have a draw\n\n"; }
 }

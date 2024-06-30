@@ -1,3 +1,4 @@
+#pragma once
 /**
  @file Game.h
  @author Gregório da Luz
@@ -5,9 +6,6 @@
  @brief Game header for Game.cpp for Othello game
  **/
 #include <iostream>
-#include "Player.h"
-
-using namespace std;
 
 class Game
 {
