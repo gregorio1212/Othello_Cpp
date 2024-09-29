@@ -8,18 +8,24 @@
 #include <iostream>
 #include <assert.h> 
 
+enum class PlayerColor
+{
+	WHITE = 1,
+	BLACK
+};
+
 class Player
 {
 private:
 	int m_n_disks_available;
-	int m_color;				//WHITE == 1 BLACK == 2
+	PlayerColor m_color;
 public:
-	Player(int color) : m_color{color}, m_n_disks_available { 28 } {}
+	Player(PlayerColor color) : m_color{color}, m_n_disks_available { 28 } {}
 	int getDisksAvailable() const { return m_n_disks_available; }
 	void oneLessDisk();
 	void giveMeOneDisk(Player& giving);
 	void resetDisks() { m_n_disks_available = 28; }
-	int getColor() const { return m_color; }
+	PlayerColor getColor() const { return m_color; }
 };
 
 // I could set X in the places the player can set their next move
